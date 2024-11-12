@@ -1,0 +1,111 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SaraAnsh - Upload Data</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'styles.css' %}">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+ 
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container p-2">
+    <a class="navbar-brand" href="#"><i class="bi bi-file-ppt-fill"></i>&nbsp;&nbsp;SaraAnsh</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="nav-link" href="{% url 'home' %}">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="{% url 'upload' %}">Upload</a></li>
+        <li class="nav-item"><a class="nav-link" href="{% url 'generatesummary' %}">Generate Summary</a></li>
+        <li class="nav-item"><a class="nav-link" href="{% url 'settings' %}">Settings</a></li>
+        <li class="nav-item"><a class="nav-link" href="{% url 'help' %}">Help</a></li>
+        <li class="nav-item"><a class="nav-link" href="{%url 'login'%}">Login</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- Upload Page Content -->
+<div class="container my-5">
+  <div class="text-center mb-4">
+    <h1>Upload Your Data</h1>
+    <p class="lead">Simplify and manage your publication records for profile building.</p>
+  </div>
+  
+  <!-- File Upload Form -->
+  <form id="uploadForm" action="{% url 'upload' %}" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="row g-3">
+      <div class="col-md-12">
+        <label for="dataFile" class="form-label">Upload Excel or BibTeX File</label>
+        <input class="form-control" type="file" id="dataFile" name="excel_file" accept=".xlsx,.xls,.bib" required="required">
+      </div>
+    </div>
+    <button type="submit" class="btn btn-primary mt-3">Upload</button>
+    <button type="submit" class="btn btn-primary mt-3">generate</button>
+  </form>
+
+  <!-- Data Preview (Initially Hidden) -->
+  <div class="mt-5" id="previewSection">
+    <h3 class="mb-3">Preview of Uploaded Data</h3>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Data</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for row in excel_data %}
+        <tr>
+          {% for cell in row %}
+          <td>{{ cell }}</td>
+          {% endfor %}
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    <button class="btn btn-warning">Edit</button>
+  </div>
+</div>
+
+<!-- Footer -->
+<footer>
+  <div class="container">
+      <div class="footer-section footer-links">
+          <h4>Quick Links</h4>
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Service</a>
+          <a href="#">Contact Us</a>
+      </div>
+      <div class="footer-section footer-contact">
+          <h4>Contact Information</h4>
+          <p><i class="bi bi-geo-alt"></i> Kanchanwadi, Chh. Sambhajinagar, Maharashtra</p>
+          <p><i class="bi bi-envelope"></i> <a href="mailto:info@pubsum.com">info@SaraAnsh.com</a></p>
+          <p><i class="bi bi-telephone"></i> +91 9876543210</p>
+      </div>
+      <div class="footer-section footer-social">
+          <h4>Follow Us</h4>
+          <div class="social-icons">
+              <a href="#" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+              <a href="#" aria-label="Twitter"><i class="bi bi-twitter"></i></a>
+              <a href="#" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+              <a href="#" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
+              <a href="#" aria-label="YouTube"><i class="bi bi-youtube"></i></a>
+          </div>
+      </div>
+  </div>
+  <div class="footer-copyright">
+      &copy; 2024 SaraAnsh. All rights reserved.
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

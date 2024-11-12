@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SaraAnsh - Login Page</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <style>
+        /* Navbar Styles */
+        .navbar {
+            background: linear-gradient(90deg, rgb(0, 86, 179), rgb(0, 123, 255));
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar-brand {
+            font-weight: bold;
+            font-size: 1.75rem;
+            color: white;
+        }
+
+        .nav-item {
+            padding: 0px 10px;
+        }       
+
+        .navbar-nav .nav-link {
+            font-weight: bold;
+            font-size: 1.25rem;
+            color: white;
+            padding: 0px 7px;
+        }
+
+        .navbar-nav .nav-link:hover {
+            color: #d4d4d4;
+        }
+        
+        /* Footer Styles */
+footer {
+    background-color: #343a40;
+    color: white;
+    padding: 60px 0;
+    border-top: 1px solid #454d55; /* Subtle border for separation */
+}
+
+footer .container {
+    display: flex;
+    flex-wrap: wrap; /* Allows for responsive behavior */
+    justify-content: space-between; /* Spreads out the sections */
+}
+
+.footer-section {
+    flex: 1;
+    min-width: 200px; /* Ensures minimum width for responsiveness */
+    margin-bottom: 20px;
+}
+
+.footer-links, .footer-contact, .footer-social {
+    margin-bottom: 20px;
+}
+
+.footer-links a, .footer-contact p, .footer-social a {
+    color: white;
+    text-decoration: none;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.footer-links a:hover, .footer-social a:hover {
+    text-decoration: underline;
+}
+
+.footer-links a {
+    font-size: 1.1rem;
+}
+
+.footer-contact {
+    font-size: 1.1rem;
+}
+
+.footer-contact i {
+    font-size: 1.4rem; /* Slightly larger icons for visibility */
+    margin-right: 10px;
+}
+
+.footer-social {
+    text-align: center; /* Center-align the content */
+}
+
+.footer-social h4 {
+    margin-bottom: 15px;
+    font-size: 1.2rem; /* Adjust font size for the title */
+}
+
+.footer-social .social-icons {
+    display: flex;
+    justify-content: center; /* Center the icons horizontally */
+}
+
+.footer-social a {
+    margin: 0 10px; /* Space between icons */
+}
+
+.footer-social i {
+    font-size: 1.8rem; /* Larger icons for better visibility */
+    color: #ffffff;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.footer-social i:hover {
+    color: #cccccc;
+    transform: scale(1.1); /* Slightly enlarge icons on hover */
+}
+
+.footer-copyright {
+    text-align: center;
+    font-size: 0.9rem;
+    color: #a0a0a0;
+    margin-top: 20px;
+}
+
+
+        /* Modernized Login Section */
+        .login-container {
+            width: 50%;
+            margin: 5rem auto;
+            text-align: center;
+            background-color: #f7f7f7;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .login-container h1 {
+            margin-bottom: 2rem;
+            color: #333;
+            font-size: 2.5rem;
+            font-weight: bold;
+        }
+
+        .login-options {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .login-options button {
+            padding: 1rem;
+            border: none;
+            background: linear-gradient(90deg, #0056b3, #004080);
+            color: white;
+            font-size: 1.2rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .login-options button i {
+            margin-right: 10px;
+            font-size: 1.5rem;
+        }
+
+        .login-options button:hover {
+            background: linear-gradient(90deg, #004080, #003366);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .login-options button:active {
+            transform: translateY(0);
+        }
+
+        /* Specific colors for Google and Facebook buttons */
+        .google-btn {
+            background: linear-gradient(90deg, #db4437, #c23321);
+        }
+
+        .facebook-btn {
+            background: linear-gradient(90deg, #3b5998, #2d4373);
+        }
+
+        .faculty-btn, .org-btn {
+            background: linear-gradient(90deg, #0056b3, #004080);
+        }
+
+        .faculty-btn:hover, .org-btn:hover {
+            background: linear-gradient(90deg, #004080, #003366);
+        }
+
+        /* Signup Form Styling */
+        .signup-form {
+            display: none;
+            text-align: left;
+            margin-top: 20px;
+        }
+
+        .signup-form input {
+            width: 100%;
+            padding: 0.75rem;
+            margin-bottom: 1rem;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        .signup-form button {
+            width: 100%;
+            padding: 1rem;
+            border: none;
+            background-color: #28a745;
+            color: white;
+            font-size: 1.2rem;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        .signup-form button:hover {
+            background-color: #218838;
+        }
+
+        .back-to-login {
+            margin-top: 1rem;
+            font-size: 1rem;
+            color: #0056b3;
+            cursor: pointer;
+            text-decoration: underline;
+        }
+
+        .back-to-login:hover {
+            color: #004080;
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg">
+        <div class="container p-1">
+            <a class="navbar-brand" href="#"><i class="bi bi-file-ppt-fill"></i>&nbsp;&nbsp;SaraAnsh</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="{% url 'home' %}">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="{% url 'upload' %}">Upload</a></li>
+        <li class="nav-item"><a class="nav-link" href="{% url 'generatesummary' %}">Generate Summary</a></li>
+        <li class="nav-item"><a class="nav-link" href="{% url 'settings' %}">Settings</a></li>
+        <li class="nav-item"><a class="nav-link" href="{% url 'help' %}">Help</a></li>
+        <li class="nav-item"><a class="nav-link" href="{%url 'login'%}">Login</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Login Section -->
+    <div class="login-container">
+        <h1>Login with SaraAnsh</h1>
+        <div id="login-options" class="login-options">
+            
+            <button class="faculty-btn" onclick="showSignupForm('faculty')">
+                <i class="bi bi-person"></i> Login as Faculty
+            </button>
+            <button class="org-btn" onclick="showSignupForm('org')">
+                <i class="bi bi-building"></i> Login as Organization
+            </button>
+        </div>
+        
+        <!-- Faculty Signup Form -->
+        <div id="faculty-signup" class="signup-form">
+            <h2>Faculty Signup</h2>
+            <input type="text" placeholder="Faculty Name" required>
+            <input type="email" placeholder="Faculty Email" required>
+            <input type="password" placeholder="Password" required>
+            <button>Submit</button>
+            <div class="back-to-login" onclick="showLoginOptions()">Back</div>
+        </div>
+        
+        <!-- Organization Signup Form -->
+        <div id="org-signup" class="signup-form">
+            <h2>Organization Signup</h2>
+            <input type="text" placeholder="Organization Name" required>
+            <input type="email" placeholder="Organization Email" required>
+            <input type="password" placeholder="Password" required>
+            <button>Submit</button>
+            <div class="back-to-login" onclick="showLoginOptions()">Back</div>
+        </div>
+    </div>
+
+  <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="footer-section footer-links">
+            <h4>Quick Links</h4>
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms of Service</a>
+            <a href="#">Contact Us</a>
+        </div>
+        <div class="footer-section footer-contact">
+            <h4>Contact Information</h4>
+            <p><i class="bi bi-geo-alt"></i> Kanchanwadi, Chh. Sambhajinagar, Maharashtra</p>
+            <p><i class="bi bi-envelope"></i> <a href="mailto:info@pubsum.com">info@SaraAnsh.com</a></p>
+            <p><i class="bi bi-telephone"></i> +91 9876543210</p>
+        </div>
+        <div class="footer-section footer-social">
+            <h4>Follow Us</h4>
+            <div class="social-icons">
+                <a href="#" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+                <a href="#" aria-label="Twitter"><i class="bi bi-twitter"></i></a>
+                <a href="#" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+                <a href="#" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
+                <a href="#" aria-label="YouTube"><i class="bi bi-youtube"></i></a>
+            </div>
+        </div>
+    </div>
+    <div class="footer-copyright">
+        &copy; 2024 SaraAnsh. All rights reserved.
+    </div>
+</footer>
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function showSignupForm(type) {
+            document.getElementById('login-options').style.display = 'none';
+            document.getElementById('faculty-signup').style.display = type === 'faculty' ? 'block' : 'none';
+            document.getElementById('org-signup').style.display = type === 'org' ? 'block' : 'none';
+        }
+
+        function showLoginOptions() {
+            document.getElementById('login-options').style.display = 'flex';
+            document.getElementById('faculty-signup').style.display = 'none';
+            document.getElementById('org-signup').style.display = 'none';
+        }
+    </script>
+</body>
+</html>
